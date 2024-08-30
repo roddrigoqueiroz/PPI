@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/login.css">
+
+    <title>Login</title>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+</head>
+<body>
+    <main>
+        <form action="cadastraCliente.php" method="post" enctype="multipart/form-data">
+
+            <fieldset>
+                <div>
+                    <label for="nome">Usuário:</label>
+                    <input type="text" id="nome" name="nome" minlength="2" maxlength="50" autofocus required>
+                </div>
+                <div>
+                    <label for="senha">Senha:</label>
+                    <input type="password" id="senha" name="senha" required>
+                </div>
+                <div>
+                    <button type="submit">
+                        <span class="material-symbols-outlined">login</span>
+                        <span>Entrar</span>
+                    </button>
+                </div>
+            </fieldset>
+        </form>
+    </main>
+</body>
+</html>
