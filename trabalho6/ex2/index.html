@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="number" name="idade">
+    <button type="button">Digite sua idade e clique aqui</button>
+    <p></p>
+
+    <script>
+        const botao = document.querySelector('button');
+        botao.onclick = function() {
+            const campoIdade = document.querySelector('input');
+            const parSaida = document.querySelector('p');
+            parSaida.textContent = 'Você tem ' + campoIdade.value + ' anos';
+        };
+    </script>
+
+    <p>Na imagem abaixo podemos ver que o JS pegou o element imput da árvore DOM</p>
+    <img src="image.png" alt="img1">
+
+    <p>Na imagem abaixo vemos o número digitado sendo mostrado dentro da variável campoIdade.value</p>
+    <img src="image2.png" alt="img2">
+
+    <p>Na imagem abaixo vemos o texto do parágrafo sendo realmente alterado na página html</p>
+    <img src="image3.png" alt="img3">
+
+</body>
+</html>

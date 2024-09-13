@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Cálculo de Peso Ideal</h1>
+
+    <label for="altura">Informe a sua altura (em cm)</label>
+    <input type="number" name="altura" id="altura">
+
+    <label for="sexo">Informe seu sexo</label>
+    <input type="radio" name="sexo" id="masculino" value="masculino">
+    <label for="masculino">Masculino</label>
+    <input type="radio" name="sexo" id="feminino" value="feminino">
+    <label for="feminino">Feminino</label>
+
+    <button type="button">Calcular peso ideal</button>
+
+    <p></p>
+
+    <script>
+        const botao = document.querySelector('button');
+        botao.onclick = function() {
+            const campoAltura = parseInt(document.querySelector('#altura').value);
+            const campoSexo = document.querySelector('input[name="sexo"]:checked');
+            const parSaida = document.querySelector('p');
+
+            let pesoIdeal = 0;
+            if (campoSexo.value === 'masculino') {
+                pesoIdeal = 52 + (0.75 * (campoAltura - 152.4));
+            }
+            else if (campoSexo.value === 'feminino') {
+                pesoIdeal = 52 + (0.67 * (campoAltura - 152.4));
+            }
+
+            const saida = `Seu peso ideal é: ${pesoIdeal.toFixed(2)} kg`;
+            parSaida.textContent = saida;
+        };
+    </script>
+
+    <p>A imagem abaixo mostra as variáveis campoAltura, campoSexo e parSaida instanciadas com os valores pegos da DOM</p>
+    <img src="image.png" alt="img1">
+
+    <p>A imagem abaixo mostra que o código foi pelo caminho do cálculo do peso ideal masculino ao checar o valor da variável campoSexo</p>
+    <img src="image2.png" alt="img2">
+
+    <p>A imagem abaixo mostra a string sendo instanciada com o valor da variável a ser mostrada na página</p>
+    <img src="image3.png" alt="img3">
+
+    <p>A imagem abaixo mostra o texto direto na página e o fim da execução do script</p>
+    <img src="image4.png" alt="img4">
+
+</body>
+</html>
