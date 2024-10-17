@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Teste Ajax - onerror</title>
+  <style>
+    body {
+      font: 1.2rem Helvetica;
+      line-height: 1.5rem;
+      background-image: url("images/bg2.jpg");
+      background-size: cover;
+      margin: 0;
+    }
+
+    main {
+      width: 60%;
+      background-color: #fff;
+      border: 0.5px solid #ccc;
+      margin: 0;
+      padding: 2% 4%;
+
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  </style>
+</head>
+
+<body>
+
+  <main>
+    <label for="cep">Informe o CEP (38400-100 ou 38700-000)</label>
+    <input type="text" id="cep">
+    <span id="cidade"><span>
+  </main>
+
+  <script>
+    function buscaCidade(cep) {
+      // Ignora valores com caracteres diferentes do esperado, para apenas realizar a busca quando o
+      // CEP estiver completo
+      if (cep.length != 9) 
+        return;
+
+      let xhr = new XMLHttpRequest();
+      // Abre a requisição chamando a rota php que busca a cidade de acordo com o CEP no query param
+      xhr.open("GET", "busca-cidade.php?cep=" + cep);
+      xhr.onload = function () {
+        // Se a requisição foi bem sucedida, insere o texto da resposta no span cidade
+        if (xhr.status == 200)
+          document.getElementById("cidade").textContent = xhr.responseText;
+        // Se não, coloca o span como string vazia e exibe no console o status, statusText e a resposta
+        else {
+          document.getElementById("cidade").textContent = "";
+          console.log(xhr.status, xhr.statusText, xhr.responseText);
+        }
+      };
+
+      // Se ocorrer um erro de rede, exibe no console
+      xhr.onerror = function () {
+        console.log("Erro de rede");
+      };
+
+      xhr.send();
+    }
+
+    // Adiciona um listener para o evento keyup no input cep, que chama a função buscaCidade
+    const inputCep = document.querySelector("#cep");
+    inputCep.onkeyup = () => buscaCidade(inputCep.value);
+  </script>
+
+</body>
+
+</html>

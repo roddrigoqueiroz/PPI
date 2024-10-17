@@ -1,0 +1,55 @@
+-----------CEP: 38400-100-------------
+Qual foi o código de status retornado? -> 200 OK
+
+Qual o valor do cabeçalho Content-Type da resposta HTTP? Por quê?
+Content-Type: text/html; charset=UTF-8
+Porque no lado do servidor não foi configurado nenhum tipo de respota para esta chamada e, por padrão, é retornado sempre
+text/html
+
+Qual o valor recebido no corpo da resposta HTTP (aba Response)?
+Uberlândia
+
+Qual o valor do cabeçalho Server da resposta HTTP?
+Server: nginx
+
+A requisição HTTP possui o cabeçalho Content-Type? Por quê?
+Não, pois métodos get não possuem um body e, portanto, não têm porquê utilizarem o content-type
+
+-----------CEP: 38400-500-------------
+Qual foi o código de status retornado? -> 400 Not Found
+
+Qual o valor do cabeçalho Content-Type da resposta HTTP? Por quê?
+Content-Type: text/html; charset=UTF-8
+Porque no lado do servidor não foi configurado nenhum tipo de respota para esta chamada e, por padrão, é retornado sempre
+text/html. Como no caso de erro também é performado o echo, ele também emite uma string de retorno
+
+Qual o valor recebido no corpo da resposta HTTP (aba Response)?
+38400-500 is not available
+
+Qual o valor do cabeçalho Server da resposta HTTP?
+Server: nginx
+
+A requisição HTTP possui o cabeçalho Content-Type? Por quê?
+Não, pois apesar do status retornado ser diferente, a operação chamada no servidor foi a mesma (GET) e, por isso, pelo
+mesmo motivo da resposta do cep anterior, não se tem content-type
+
+---------------------------------------
+
+e) Simule um erro no script PHP removendo o fecha parênteses do primeiro if. Envie o script
+com o erro para o servidor e repita a busca usando o CEP 38400-100. Qual foi o código de
+status retornado? E o conteúdo do corpo da resposta HTTP?
+500 Internal Server Error
+Não houve conteúdo na resposta HTTP, pois como o script PHP nem compilou, não foi possível nem gerar um response
+
+f) No infinityfree, acesse Accounts → Sua Conta → Control Panel → Alter PHP Config → Alter
+PHP Directives e altere a opção Display Errors para on. Repita o teste realizado no item
+anterior e observe o resultado. O que mudou? Qual foi o código de status retornado? O que
+foi retornado no corpo da resposta HTTP? Em qual situação essa configuração seria útil? Em
+qual situação ela jamais deveria ser utilizada?
+Agora foi retornado status 200 OK, o que fez com que a mensagem de erro emitida fosse parar direto na página html,
+devido à linha de código document.getElementById("cidade").textContent = xhr.responseText;
+Agora temos o seguinte mensagem no response: Parse error: syntax error, unexpected variable "$cep", expecting "(" in /home/vol4_7/infinityfree.com/if0_37068961/htdocs/trabalho11/Exemplos-Ajax-XHR/ex2-busca-cidade/busca-cidade.php on line 8
+Essa configuração seria muito útil em um ambiente de homologação, já que serveria apenas para realizarem testes na página
+e capturar este e outros tipos de erros. Contudo, seria muito inadequado (e inseguro) utilizar tal configuração quando
+fosse subir o ambiente de produção, onde os usuários reais (e hackers) teriam contato com as possíveis mensagens de erro.
+Nestes casos, quanto menos informação dermos aos possíveis atacantes de como o nosso sistema funciona melhor
