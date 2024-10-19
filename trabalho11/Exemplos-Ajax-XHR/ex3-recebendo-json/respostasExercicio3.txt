@@ -1,0 +1,14 @@
+Qual foi o código de status retornado? -> 200 OK
+
+Qual o valor do cabeçalho Content-Type da resposta HTTP? Por quê?
+Content-Type: application/json
+Porque desta vez foi setado no servidor o tipo de resposta que deveria ir junto do content-type, neste caso, application/json
+
+Qual o valor recebido no corpo da resposta HTTP (aba Response)?
+{"rua":"Av Floriano","bairro":"Centro","cidade":"Uberl\u00e2ndia"}
+
+Qual o valor do cabeçalho Server da resposta HTTP?
+Server: nginx
+
+A requisição HTTP possui o cabeçalho Content-Type? Por quê?
+Não, pois métodos get não possuem um body e, portanto, não têm porquê utilizarem o content-type

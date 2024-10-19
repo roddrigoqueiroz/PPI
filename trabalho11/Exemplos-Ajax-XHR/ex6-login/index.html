@@ -103,9 +103,13 @@
         }
 
         let loginResponse = xhr.response;
+        // faz o redirecionamento para a tela home.html através da resposta obtida pelo servidor
+        // a resposta vem empacotada na variavel newLocation do response
         if (loginResponse.isAuthorized)
           window.location = loginResponse.newLocation;
         else {
+          // Caso o login falhe, exibe uma mensagem de erro adicionando o elemento hidden
+          // e reseta o campo da senha
           const pLoginFail = document.querySelector("#loginFailMsg");
           pLoginFail.classList.remove("hidden");
           setTimeout(() => pLoginFail.classList.add("hidden"), 3000);
@@ -123,6 +127,10 @@
     }
 
     const form = document.querySelector("#formLogin");
+
+    
+    // A submissão do formulário é tratada via AJAX, não pelo método tradicional de submissão de formulários
+    // A submissão padrão do formulário é impedida usando e.preventDefault()
     form.onsubmit = function (e) {
       e.preventDefault();
       sendForm(form);

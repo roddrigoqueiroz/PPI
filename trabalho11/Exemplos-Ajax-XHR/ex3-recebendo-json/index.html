@@ -44,20 +44,26 @@
   <script>
 
     function buscaEndereco(cep) {
+      // Considera apenas CEPs com 9 caracteres e com a máscara xxxxx-xxx
       if (cep.length != 9)
         return;
 
+      // Cria um objeto XHR para fazer a requisição
       let xhr = new XMLHttpRequest();
+      // Seta o valor do cep na rota do get
       xhr.open("GET", "busca-endereco.php?cep=" + cep);
+      // Indica que espera uma resposta do servidor no formato JSON
       xhr.responseType = 'json';
 
       xhr.onload = function () {
+        // Se o status não for Sucesso, ou não houver resposta, exibe mensagem de erro no console
         if (xhr.status != 200 || xhr.response === null) {
           console.log("A resposta não pode ser obtida ");
           console.log(xhr.status);
           return;
         }
 
+        // Caso a resposta seja obtida, preenche os campos do formulário com os valores recebidos
         const endereco = xhr.response;
         let form = document.querySelector("form");
         form.rua.value = endereco.rua;
@@ -65,13 +71,16 @@
         form.cidade.value = endereco.cidade;
       }
 
+      // Caso a requisição falhe, exibe mensagem de erro no console
       xhr.onerror = function () {
         console.error("Erro de rede - requisição não finalizada");
       };
 
+      // Envia a requisição
       xhr.send();
     }
 
+    // Adiciona um evento para buscar o CEP ao terminar de digitá-lo
     const inputCep = document.querySelector("#cep");
     inputCep.onkeyup = () => buscaEndereco(inputCep.value);
   </script>

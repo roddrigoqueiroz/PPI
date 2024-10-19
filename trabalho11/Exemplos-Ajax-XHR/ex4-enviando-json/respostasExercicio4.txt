@@ -1,0 +1,13 @@
+Quais são as principais diferenças desse exemplo comparado ao ex3-recebendo-json1?
+Utilizamos o método post para realizar a requisição para o servidor;
+Agora é necessário uma chave da API para poder realizar a busca do cep (de certa forma uma autenticação)
+Se não houver esta autenticação o servidor não retorna nenhum valor
+
+Qual o valor dos cabeçalhos Content-Type e Content-Length?
+Content-Type: application/json
+Content-Length: 63
+
+O que é apresentado na aba Payload? O que isso significa?
+{"cep":"38400-100","email":"fulano@mail.com","apikey":"123456"}
+Isso é o json que criamos na função buscaEndereco para enviar no request ao servidor e nele contém os valores
+que setamos no objeto objetoJS.
