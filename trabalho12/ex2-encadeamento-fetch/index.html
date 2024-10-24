@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Encadeando requisições assíncronas</title>
+  <style>
+    body {
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      line-height: 1.5rem;
+      background-color: #ddd;
+      color: #555;
+      margin: 0;
+    }
+
+    main {
+      width: 60%;
+      margin: 0;
+      padding: 2% 4%;
+      background-color: #eee;
+
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    h1 {
+      font-size: 5rem;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+
+  <main>
+    <h2>Temperatura Local: <span id="temp">...</span></h2>
+    <h2>Velocidade do Vento: <span id="wind">...</span></h2>
+  </main>
+  <script>
+
+    // OBS: A função não trata todos os erros
+    function buscaClimaLocal() {
+      // Começa buscando a localização do usuário através da ipapi.co, que, através do ip retorna, dentre outras informações
+      // a latitude e longitude do local
+      fetch('https://ipapi.co/json/')
+        // Fazemos a leitura do json retornado pela ipapi.co
+        .then(response => response.json())
+        // Com os dados da localização do usuário, fazemos uma nova requisição para a api do Open Meteo,
+        // que retorna o clima atual, dadas a latitude e longitude do local que buscamos na promise anterior
+        .then(data => fetch(`https://api.open-meteo.com/v1/forecast?latitude=${data.latitude}&longitude=${data.longitude}&current_weather=true`))
+        .then(response => response.json())
+        .then(data => {
+          // Depois de ler o JSON, atualizamos as informações dos elementos HTML da página de acordo com os dados
+          // retornados pela api do Open Meteo
+          document.getElementById("temp").textContent = data.current_weather.temperature + '°';
+          document.getElementById("wind").textContent = data.current_weather.windspeed + ' km/h';
+        })
+        .catch(error => console.log(error));
+    }
+
+    window.onload = function () {
+      buscaClimaLocal();
+    }
+  </script>
+
+</body>
+
+</html>
